@@ -1,0 +1,51 @@
+Q1: Squares of a Sorted Array
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+Sol1:
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        sq =[]
+        for i in nums:
+            sq.append(i**2)
+        sq.sort()
+        return sq
+ Sol2: Using pointers
+        i = 0
+        j = len(nums)-1
+        temp = []
+        while(i<=j):
+            if nums[i]*nums[i] > nums[j]*nums[j]:
+                temp.append(nums[i]*nums[i])
+                i +=1
+            else:
+                temp.append(nums[j]*nums[j])
+                j -=1
+        return temp[::-1]
+
+
+
+
+
+
+Q2: Rotate array
+Given an array, rotate the array to the right by k steps, where k is non-negative.
+Sol1:Using stacks pop method
+            for _ in range(k):
+            nums.insert(0, nums.pop())
+       
+Sol2:
+k = k % len(nums)
+nums[:] = nums[-k:] + nums[:-k]
+
+Sol3:
+1if len(nums) <= 1:
+            return nums
+        
+        temp = nums.copy()
+        
+        for i in range(len(nums)):
+            total = i + k
+            
+            while total > len(nums) - 1:         
+                total = total - len(nums)
+            
+            nums[total] = temp[i]
