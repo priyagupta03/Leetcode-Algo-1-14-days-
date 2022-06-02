@@ -1,0 +1,21 @@
+Q1.Write a function that reverses a string. The input string is given as an array of characters s.
+You must do this by modifying the input array in-place with O(1) extra memory.
+Sol1:
+s.reverse()
+Sol2:
+l = 0 
+        h = len(s)-1
+        while l<h:
+            s[l], s[h] = s[h], s[l]
+            l+=1
+            h-=1
+      
+      
+
+
+Q2:Reverse Words in a String III
+Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+Sol1:
+return " ".join(list(map(lambda x: x[::-1], s.split(' '))))
+Sol2:
+return ' '.join(a[::-1] for a in s.split())
