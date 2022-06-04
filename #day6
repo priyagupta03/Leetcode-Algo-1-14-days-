@@ -1,0 +1,66 @@
+Q1: Longest Substring without repeat characters
+Given a string s, find the length of the longest substring without repeating characters.
+Sol1:
+final,l= 0,[]
+        for i in s:
+            if i in l:
+                final=max(final,len(l))
+                del l[0:l.index(i)+1]
+                l.append(i) 
+            else:
+                l.append(i)  
+                final=max(final,len(l))
+        return final
+        
+Sol2:
+char_set = set()
+
+
+        left_p = 0
+        longest = 0
+
+        for right_p in range(len(s)):
+            while s[right_p] in char_set:
+                char_set.remove(s[left_p])
+                left_p += 1
+            char_set.add(s[right_p])
+            longest = max(longest, right_p - left_p + 1)
+
+        return longest
+        
+Sol3
+ans = 0
+        for i in range(len(s)):
+            st = set()
+            for j in range(i, len(s)):
+                if s[j] in st:
+                    break
+                st.add(s[j])
+                ans = max(ans, len(st))
+        return ans
+        
+        
+        
+
+Q1: Permutation in string
+Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise. In other words, return true if one of s1's permutations is the substring of s2.
+Sol1:
+if len(s1)>len(s2):
+            return False
+        
+        length_of_s1 = len(s1)
+        s1_counter = Counter(s1)
+        window_counter = Counter()
+        
+        for i,c in enumerate(s2):
+            window_counter[c] +=1
+            
+            if i>= length_of_s1:
+                element_from_left = s2[i-length_of_s1]
+                if window_counter[element_from_left] == 1:
+                    del window_counter[element_from_left]
+                else:
+                    window_counter[element_from_left] -=1
+            if window_counter == s1_counter:
+                return True
+        return False
